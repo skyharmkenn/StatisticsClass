@@ -58,3 +58,13 @@ pon_pie <- table(pon$Political.Affiliation)
 pie(pon_pie)
 
 ```
+
+## Dotplot
+
+```{r}
+ggplot(pon, aes(x = Age)) + geom_dotplot(binwidth = .5)
+
+ggplot(pon, aes(x = Age, fill = factor(Political.Affiliation))) + geom_dotplot(binwidth = .8)
+```
+
+

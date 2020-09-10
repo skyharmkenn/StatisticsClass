@@ -1,7 +1,7 @@
 ---
 title: "Good Template"
-author: "Your Name"
-date: "2020 September 08"
+author: "Ken Harmon"
+date: "2020 September 10"
 output:
   html_document:
     keep_md: yes
@@ -23,3 +23,55 @@ editor_options:
 
 
 ## Categorical Data
+
+
+```r
+pon <- read.csv("201709-CAH_PulseOfTheNation.csv")
+
+# Pivot Table
+
+pon_pivot <- table(pon$Gender,pon$Political.Affiliation)
+
+# Simple side by side
+
+barplot(pon_pivot, beside = T)
+```
+
+![](Graphics_files/figure-html/unnamed-chunk-2-1.png)<!-- -->
+
+```r
+# Prettier
+
+barplot(pon_pivot, ylab="Frequency", xlab="Party", main="Side-By-Side Bar Chart", col=c("blue", "pink", "purple" , "green" ), beside=T, width=.3)
+
+legend("topright", title="Gender", legend= sort(unique(pon$Gender)), fill =c("blue", "pink", "purple" , "green" ), box.lty=0)
+```
+
+![](Graphics_files/figure-html/unnamed-chunk-2-2.png)<!-- -->
+
+```r
+# Pie
+
+pon_pie <- table(pon$Political.Affiliation)
+
+pie(pon_pie)
+```
+
+![](Graphics_files/figure-html/unnamed-chunk-2-3.png)<!-- -->
+
+## Dotplot
+
+
+```r
+ggplot(pon, aes(x = Age)) + geom_dotplot(binwidth = .5)
+```
+
+![](Graphics_files/figure-html/unnamed-chunk-3-1.png)<!-- -->
+
+```r
+ggplot(pon, aes(x = Age, fill = factor(Political.Affiliation))) + geom_dotplot(binwidth = .8)
+```
+
+![](Graphics_files/figure-html/unnamed-chunk-3-2.png)<!-- -->
+
+
