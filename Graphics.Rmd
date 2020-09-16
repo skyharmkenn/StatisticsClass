@@ -59,7 +59,9 @@ pie(pon_pie)
 
 ```
 
-## Dotplot
+## Quantitative Graphs
+
+### Dotplot
 
 ```{r}
 ggplot(pon, aes(x = Age)) + geom_dotplot(binwidth = .5)
@@ -67,4 +69,36 @@ ggplot(pon, aes(x = Age)) + geom_dotplot(binwidth = .5)
 ggplot(pon, aes(x = Age, fill = factor(Political.Affiliation))) + geom_dotplot(binwidth = .8)
 ```
 
+### Histogram
+
+```{r}
+hist(pon$Age)
+
+ggplot(pon, aes(x = Age)) + geom_histogram(binwidth = 5, color = "blue")
+
+```
+
+### Stem and Leaf
+
+```{r}
+stem(pon$Income)
+```
+
+```{r}
+stuff <- c(628,669,740,651,710,736,717,698,653,604,784,790,811,830,858,858,896,806,790,957,872)
+
+stem(stuff)
+stem(stuff, scale = 2)
+```
+
+### Summary and Boxplot
+
+```{r}
+summary(stuff)
+boxplot(stuff)
+
+df.stuff <- data.frame(stuff)
+ggplot(df.stuff,aes("stuff",stuff)) + geom_boxplot() +
+    geom_jitter(shape = 15, color = "steelblue", position = position_jitter(width = 0.21)) 
+```
 
