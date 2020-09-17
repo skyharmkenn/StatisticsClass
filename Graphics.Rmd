@@ -102,3 +102,31 @@ ggplot(df.stuff,aes("stuff",stuff)) + geom_boxplot() +
     geom_jitter(shape = 15, color = "steelblue", position = position_jitter(width = 0.21)) 
 ```
 
+```{r}
+data <- c(16,25,24,19,33,25,34,46,37,33,42,40,37,34,49,73,46,45,45,26,28)
+
+stem(data)
+stem(data, scale = 2)
+```
+
+### Summary and Boxplot
+
+```{r}
+summary(data)
+boxplot(data)
+
+df.stuff <- data.frame(data)
+ggplot(df.stuff,aes("stuff",data)) + geom_boxplot() +
+    geom_jitter(shape = 15, color = "steelblue", position = position_jitter(width = 0.21)) 
+```
+
+### Standard Deviation
+
+```{r}
+sd(data)
+```
+
+
+
+
+
