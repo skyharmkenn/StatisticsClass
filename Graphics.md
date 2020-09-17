@@ -1,7 +1,7 @@
 ---
 title: "Good Template"
 author: "Ken Harmon"
-date: "2020 September 15"
+date: "2020 September 17"
 output:
   html_document:
     keep_md: yes
@@ -132,9 +132,9 @@ stem(pon$Income)
 
 
 ```r
-stuff <- c(628,669,740,651,710,736,717,698,653,604,784,790,811,830,858,858,896,806,790,957,872)
+data <- c(628,669,740,651,710,736,717,698,653,604,784,790,811,830,858,858,896,806,790,957,872)
 
-stem(stuff)
+stem(data)
 ```
 
 ```
@@ -148,7 +148,7 @@ stem(stuff)
 ```
 
 ```r
-stem(stuff, scale = 2)
+stem(data, scale = 2)
 ```
 
 ```
@@ -164,4 +164,50 @@ stem(stuff, scale = 2)
 ##   9 | 0
 ##   9 | 6
 ```
+
+### Boxplot
+
+
+```r
+boxplot(data, horizontal = T)
+```
+
+![](Graphics_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
+
+```r
+df.stuff <- data.frame(data)
+ggplot(df.stuff,aes("stuff",data)) + geom_boxplot() +
+    geom_jitter(shape = 15, color = "steelblue", position = position_jitter(width = 0.21)) + coord_flip()
+```
+
+![](Graphics_files/figure-html/unnamed-chunk-7-2.png)<!-- -->
+
+## Numerical
+
+### Summary
+
+
+```r
+summary(data)
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   604.0   698.0   784.0   764.7   830.0   957.0
+```
+
+### Standard Deviation
+
+
+```r
+sd(data)
+```
+
+```
+## [1] 95.6903
+```
+
+
+
+
 
