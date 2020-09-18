@@ -120,9 +120,47 @@ sd(data)
 
 ```{r}
 cowboys <- c(310,307,345,324,305,301,290,307)
-sdbh <- data.frame("Weight"= cowboys)
 
+sdbh <- data.frame("Weight"= cowboys)
+cowboy.mean <- mean(cowboys)
+sdbh$deviations <- cowboys - cowboy.mean
+sdbh$sqdev <- (sdbh$deviations)^2
+
+sumsqdev <- sum(sdbh$sqdev)
+
+Var.cowboys <- sumsqdev / (length(cowboys)-1)
+
+var(cowboys)
+
+sd.cowboys <- sqrt(Var.cowboys)
+
+sd(cowboys)
 ```
 
+### Example 
 
+ctrl alt i
+
+```{r}
+BB <- c(67,72,76,76,84)
+
+mean(BB)
+sdbh <- data.frame("Height"=BB)
+sdbh$dev <- BB -mean(BB)
+sdbh$sqdev <- (sdbh$dev)^2
+
+sum(sdbh$sqdev) / (length(BB)-1)
+
+sqrt(sum(sdbh$sqdev) / (length(BB)-1))
+
+var(BB)
+sd(BB)
+```
+
+```{r}
+summary(c(127,44,28,83,0,6,78,6,5,213,73,20,214,28,11))
+sd(c(127,44,28,83,0,6,78,6,5,213,73,20,214,28,11))
+summary(c(112,203,102,54,379,305,179,24,127,65,41,27,298,6,130,0))
+sd(c(112,203,102,54,379,305,179,24,127,65,41,27,298,6,130,0))
+```
 
