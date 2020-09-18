@@ -1,7 +1,7 @@
 ---
-title: "Good Template"
+title: "Graphics R-Markdown"
 author: "Ken Harmon"
-date: "2020 September 17"
+date: "2020 September 18"
 output:
   html_document:
     keep_md: yes
@@ -132,19 +132,19 @@ stem(pon$Income)
 
 
 ```r
-data <- c(628,669,740,651,710,736,717,698,653,604,784,790,811,830,858,858,896,806,790,957,872)
+data <- c(310,307,345,324,305,301,290,307)
 
 stem(data)
 ```
 
 ```
 ## 
-##   The decimal point is 2 digit(s) to the right of the |
+##   The decimal point is 1 digit(s) to the right of the |
 ## 
-##   6 | 03557
-##   7 | 01244899
-##   8 | 113667
-##   9 | 06
+##   28 | 0
+##   30 | 15770
+##   32 | 4
+##   34 | 5
 ```
 
 ```r
@@ -153,16 +153,14 @@ stem(data, scale = 2)
 
 ```
 ## 
-##   The decimal point is 2 digit(s) to the right of the |
+##   The decimal point is 1 digit(s) to the right of the |
 ## 
-##   6 | 03
-##   6 | 557
-##   7 | 01244
-##   7 | 899
-##   8 | 113
-##   8 | 667
-##   9 | 0
-##   9 | 6
+##   29 | 0
+##   30 | 1577
+##   31 | 0
+##   32 | 4
+##   33 | 
+##   34 | 5
 ```
 
 ### Boxplot
@@ -193,7 +191,7 @@ summary(data)
 
 ```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   604.0   698.0   784.0   764.7   830.0   957.0
+##   290.0   304.0   307.0   311.1   313.5   345.0
 ```
 
 ### Standard Deviation
@@ -204,10 +202,17 @@ sd(data)
 ```
 
 ```
-## [1] 95.6903
+## [1] 16.6256
 ```
 
 
+### Standard Deviation by Hand
+
+
+```r
+cowboys <- c(310,307,345,324,305,301,290,307)
+sdbh <- data.frame("Weight"= cowboys)
+```
 
 
 
