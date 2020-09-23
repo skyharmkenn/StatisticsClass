@@ -212,10 +212,12 @@ for (i in 1:(length(stan.z)-1)) {
 
 # print stanine values in white
 # font = 2 prints numbers in boldface
-text(seq(-3,3), 0.015, label=-3:3, col="white", font=2)
+text(seq(-4,4), 0.015, label=-4:4, col="blue", font=2)
  
 # print cumulative probabilities in black below the curve
-text(seq(-3,3), -0.015, label=paste(round(stan.PR[-c(1, 6)], 5)*100, "%", sep=""), col="black", adj=.5, cex=.8)
+text(seq(-4,4), -0.015, label=paste(round(stan.PR, 5)*100, "%", sep=""), col="black", adj=.5, cex=.8)
 text(0, -0.035, label="Percentage of sample <= this value", adj=0.5, cex=.8)
+text(seq(-2.5,2.5), .115, label=paste(c(2.35,13.5,34,34,13.5,2.35), "%ish", sep=""), col="black", adj=.5, cex=.8)
+
 ```
 
