@@ -41,6 +41,13 @@ pon <- read.csv("201709-CAH_PulseOfTheNation.csv")
 
 pon_pivot <- table(pon$Gender,pon$Political.Affiliation)
 
+pon_pivot
+
+```
+
+### Bar Chart
+
+```{r}
 # Simple side by side
 
 barplot(pon_pivot, beside = T)
@@ -50,14 +57,39 @@ barplot(pon_pivot, beside = T)
 barplot(pon_pivot, ylab="Frequency", xlab="Party", main="Side-By-Side Bar Chart", col=c("blue", "pink", "purple" , "green" ), beside=T, width=.3)
 
 legend("topright", title="Gender", legend= sort(unique(pon$Gender)), fill =c("blue", "pink", "purple" , "green" ), box.lty=0)
+```
 
-# Pie
+```{r}
+ratings <- c("G","PG","PG-13", "R", "NC-17")
+percents <- c(8,24,10,55,3)
 
+
+barplot(percents, names.arg = ratings)
+
+movies <- data.frame(ratings,percents)
+
+movies$ratings <- factor(movies$ratings, levels = movies$ratings[order(movies$percents, decreasing = TRUE)])
+
+ggplot(movies, aes(ratings,percents)) + geom_bar(stat = "identity")
+```
+
+### Pie Chart
+
+```{r}
 pon_pie <- table(pon$Political.Affiliation)
 
 pie(pon_pie)
-
 ```
+
+
+```{r}
+ratings <- c("G","PG","PG-13", "R", "NC-17")
+percents <- c(8,24,10,55,3)
+
+pie(percents, ratings)
+```
+
+
 
 ## Quantitative Graphs
 
@@ -137,59 +169,53 @@ sd.cowboys <- sqrt(Var.cowboys)
 sd(cowboys)
 ```
 
+## Normal Curve
+
+### Percentile
 
 ```{r}
-ratings <- c("G","PG","PG-13", "R", "NC-17")
-percents <- c(8,24,10,55,3)
-
-pie(percents, ratings)
-barplot(percents, names.arg = ratings)
-
-movies <- data.frame(ratings,percents)
-
-movies$ratings <- factor(movies$ratings, levels = movies$ratings[order(movies$percents, decreasing = TRUE)])
-
-ggplot(movies, aes(ratings,percents)) + geom_bar(stat = "identity")
+# draw the normal curve
+curve(dnorm(x,0,1), xlim=c(-4,4), main="Normal density")
+ 
+# define shaded region
+from.z <- -4
+to.z <- qnorm(.4)
+ 
+S.x  <- c(from.z, seq(from.z, to.z, 0.01), to.z)
+S.y  <- c(0, dnorm(seq(from.z, to.z, 0.01)), 0)
+polygon(S.x,S.y, col="red")
 ```
-### Example 
 
-ctrl alt i
+### Whole Standard Deviations
 
 ```{r}
-BB <- c(67,72,76,76,84)
+# First: Calculate stanine breaks (on a z scale)
+stan.z <- c(seq(-4, 4))
+ 
+# Second: get cumulative probabilities for these z values
+stan.PR <- pnorm(stan.z)
+ 
+# define a color ramp from blue to red (... or anything else ...)
+c_ramp <- colorRamp(c("darkblue", "red"), space="Lab")
+ 
+# draw the normal curve, without axes; reduce margins on left, top, and right
+par(mar=c(2,0,0,0))
+curve(dnorm(x,0,1), xlim=c(-4,4), ylim=c(-0.03, .45), xlab="", ylab="", axes=FALSE)
 
+# Calculate polygons for each stanine region
+# S.x = x values of polygon boundary points, S.y = y values
+for (i in 1:(length(stan.z)-1)) {
+    S.x  <- c(stan.z[i], seq(stan.z[i], stan.z[i+1], 0.01), stan.z[i+1])
+    S.y  <- c(0, dnorm(seq(stan.z[i], stan.z[i+1], 0.01)), 0)
+    polygon(S.x,S.y, col=rgb(c_ramp(i/9), max=255))
+}
 
-mean(BB)
-sdbh <- data.frame("Height"=BB)
-sdbh$dev <- BB -mean(BB)
-sdbh$sqdev <- (sdbh$dev)^2
-
-sum(sdbh$sqdev) / (length(BB)-1)
-
-sqrt(sum(sdbh$sqdev) / (length(BB)-1))
-
-var(BB)
-sd(BB)
-```
-
-```{r}
-summary(c(127,44,28,83,0,6,78,6,5,213,73,20,214,28,11))
-sd(c(127,44,28,83,0,6,78,6,5,213,73,20,214,28,11))
-summary(c(112,203,102,54,379,305,179,24,127,65,41,27,298,6,130,0))
-sd(c(112,203,102,54,379,305,179,24,127,65,41,27,298,6,130,0))
-```
-
-ggplot(movies, aes(ratings,percents)) + geom_bar(stat = "identity")
-
-```
-
-```{r}
-phones <- c(46,39,19,17)
-barplot(phones)
-```
-
-```{r}
-facebook <- c(78/82,49/70,21/67)
-barplot(facebook)
+# print stanine values in white
+# font = 2 prints numbers in boldface
+text(seq(-3,3), 0.015, label=-3:3, col="white", font=2)
+ 
+# print cumulative probabilities in black below the curve
+text(seq(-3,3), -0.015, label=paste(round(stan.PR[-c(1, 6)], 5)*100, "%", sep=""), col="black", adj=.5, cex=.8)
+text(0, -0.035, label="Percentage of sample <= this value", adj=0.5, cex=.8)
 ```
 
