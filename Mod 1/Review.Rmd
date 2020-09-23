@@ -130,14 +130,6 @@ percents <- c(8,24,10,55,3)
 
 pie(percents, ratings)
 barplot(percents, names.arg = ratings)
-
-movies <- data.frame(ratings,percents)
-
-movies$ratings <- factor(movies$ratings, levels = movies$ratings[order(movies$percents, decreasing = TRUE)])
-
-
-ggplot(movies, aes(ratings,percents)) + geom_bar(stat = "identity")
-
 ```
 
 ```{r}
@@ -148,5 +140,16 @@ barplot(phones)
 ```{r}
 facebook <- c(78/82,49/70,21/67)
 barplot(facebook)
+```
+
+```{r}
+density <- c(5.5,5.61,4.88,5.07,5.26,5.55,5.36,5.29,5.58,5.65,5.57,5.53,5.62,5.29,5.44,5.34,5.79,5.10,5.27,5.39,5.42,5.47,5.63,5.34,5.46,5.3,5.75,5.68,5.85)
+stem(density)
+median(density)
+```
+
+```{r}
+gp <- c(43,80,91,103,137,191,45,80,92,104,138,198,53,81,92,107,139,211,56,81,97,108,144,214,56,81,99,109,145,243,57,82,99,113,147,249,58,83,100,114,156,329,66,83,100,118,162,380,67,84,101,121,174,403,73,88,102,123,178,511,74,89,102,126,179,522,79,91,102,128,184,598)
+hist(gp)
 ```
 
