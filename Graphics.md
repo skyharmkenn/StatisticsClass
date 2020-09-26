@@ -1,7 +1,7 @@
 ---
 title: "Graphics R-Markdown"
 author: "Ken Harmon"
-date: "2020 September 23"
+date: "2020 September 25"
 output:
   html_document:
     keep_md: yes
